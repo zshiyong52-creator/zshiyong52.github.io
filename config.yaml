@@ -1,0 +1,50 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: info
+
+proxies:
+  - name: "miyavip-01"
+    type: http
+    server: platinum-vip.miyavip.vip
+    port: 8001
+    username: wqdazrerwq
+    password: romotmopimioo
+
+  - name: "miyavip-02"
+    type: http
+    server: platinum-vip.miyavip.vip
+    port: 8001
+    username: qdqeraxdze
+    password: ipemytmwmorp
+
+  - name: "miyavip-03"
+    type: http
+    server: platinum-vip.miyavip.vip
+    port: 8001
+    username: sazdrxdaqr
+    password: romotmopimwe
+
+proxy-groups:
+  - name: "节点选择"
+    type: select
+    proxies:
+      - 自动选择
+      - miyavip-01
+      - miyavip-02
+      - miyavip-03
+
+  - name: "自动选择"
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    proxies:
+      - miyavip-01
+      - miyavip-02
+      - miyavip-03
+
+rules:
+  - DOMAIN-SUFFIX,google.com,节点选择
+  - DOMAIN-SUFFIX,youtube.com,节点选择
+  - MATCH,节点选择
